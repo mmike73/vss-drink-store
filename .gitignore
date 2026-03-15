@@ -4,6 +4,14 @@ target/
 !**/src/test/**/target/
 .kotlin
 
+*.doc
+*.docx
+*.xlsx
+*.lsx
+*.xlsm
+*.xlsb
+
+
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
