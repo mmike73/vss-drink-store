@@ -8,7 +8,7 @@ import drinkshop.repository.Repository;
 
 import java.util.List;
 
-public class DrinkShopService {
+public class DrinkShopApplicationService {
 
     private final ProductService productService;
     private final OrderService orderService;
@@ -16,7 +16,7 @@ public class DrinkShopService {
     private final StocService stocService;
     private final DailyReportService report;
 
-    public DrinkShopService(
+    public DrinkShopApplicationService(
             Repository<Integer, Product> productRepo,
             Repository<Integer, Order> orderRepo,
             Repository<Integer, Reteta> retetaRepo,
