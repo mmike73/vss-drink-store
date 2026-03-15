@@ -6,7 +6,7 @@ import drinkshop.repository.file.FileOrderRepository;
 import drinkshop.repository.file.FileProductRepository;
 import drinkshop.repository.file.FileRetetaRepository;
 import drinkshop.repository.file.FileStocRepository;
-import drinkshop.service.DrinkShopService;
+import drinkshop.service.DrinkShopApplicationService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,7 +24,7 @@ public class DrinkShopApp extends Application {
         Repository<Integer, Stoc> stocRepo = new FileStocRepository("data/stocuri.txt");
 
         // ---------- Initializare Service ----------
-        DrinkShopService service = new DrinkShopService(productRepo, orderRepo, retetaRepo, stocRepo);
+        DrinkShopApplicationService service = new DrinkShopApplicationService(productRepo, orderRepo, retetaRepo, stocRepo);
 
         // ---------- Incarcare FXML ----------
 

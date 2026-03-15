@@ -1,7 +1,7 @@
 package drinkshop.ui;
 
 import drinkshop.domain.*;
-import drinkshop.service.DrinkShopService;
+import drinkshop.service.DrinkShopApplicationService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class DrinkShopController {
 
-    private DrinkShopService service;
+    private DrinkShopApplicationService service;
 
     // ---------- PRODUCT ----------
     @FXML private TableView<Product> productTable;
@@ -55,7 +55,7 @@ public class DrinkShopController {
 
     private Order currentOrder = new Order(1);
 
-    public void setService(DrinkShopService service) {
+    public void setService(DrinkShopApplicationService service) {
         this.service = service;
         initData();
     }
