@@ -24,7 +24,13 @@ public abstract class AbstractRepository<ID, E>
 
     @Override
     public E save(E entity) {
-        entities.put(getId(entity), entity);
+        ID id = getId(entity);
+
+        if (entities.containsKey(id)) {
+            return null; // already exists
+        }
+
+        entities.put(id, entity);
         return entity;
     }
 
@@ -35,7 +41,13 @@ public abstract class AbstractRepository<ID, E>
 
     @Override
     public E update(E entity) {
-        entities.put(getId(entity), entity);
+        ID id = getId(entity);
+
+        if (!entities.containsKey(id)) {
+            return null; // does nit exist
+        }
+
+        entities.put(id, entity);
         return entity;
     }
 

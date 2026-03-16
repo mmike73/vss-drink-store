@@ -14,7 +14,7 @@ public class ReceiptGenerator {
             Product p = products.stream().filter((p1)->i.getProduct().getId()==p1.getId()).toList().get(0);
             sb.append(p.getNume()+": ").append(p.getPret()).append(" x ").append(i.getQuantity()).append(" = ").append(i.getTotal()).append(" RON\n");
         }
-        sb.append("---------------------\nTOTAL: ").append(o.getTotalPrice()).append(" RON\n=====================\n");
+        sb.append("---------------------\nTOTAL: ").append(o.getTotal()).append(" RON\n=====================\n");
         return sb.toString();
     }
 }

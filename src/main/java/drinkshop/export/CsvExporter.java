@@ -12,6 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 public class CsvExporter {
+
+    private CsvExporter() { }
+
     public static void exportOrders(List<Product> products, List<Order> orders, String path) {
         try (FileWriter w = new FileWriter(path)) {
             w.write("OrderId,Product,Quantity,Price\n");
@@ -28,7 +31,7 @@ public class CsvExporter {
             String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
             w.write("TOTAL OF "+date+" is: "+sum+" RON\n");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new CsvExportException("Error exporting orders to CSV", e);
         }
     }
 }

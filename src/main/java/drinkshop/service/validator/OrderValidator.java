@@ -26,7 +26,7 @@ public class OrderValidator implements Validator<Order> {
             }
         }
 
-        if (order.getTotalPrice() < 0)
+        if (order.getTotal() < 0)
             errors += "Total invalid!\n";
 
         if (!errors.isEmpty())

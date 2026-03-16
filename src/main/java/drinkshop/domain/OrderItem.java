@@ -3,6 +3,8 @@ package drinkshop.domain;
 import java.io.Serializable;
 
 public class OrderItem implements Serializable {
+    private static final long serialVersionUID = 1905122041950251207L;
+
 
     private Product product;
     private int quantity;

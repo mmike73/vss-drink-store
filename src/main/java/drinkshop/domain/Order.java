@@ -30,10 +30,6 @@ public class Order implements Serializable {
         return items;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
     public void setItems(List<OrderItem> items) {
         this.items = items;
     }

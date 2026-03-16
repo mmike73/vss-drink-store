@@ -67,6 +67,6 @@ public class FileOrderRepository
 
         return entity.getId() + "," +
                 sb + "," +
-                entity.getTotalPrice();
+                entity.getTotal();
     }
 }
