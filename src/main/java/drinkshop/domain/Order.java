@@ -60,7 +60,7 @@ public class Order implements Serializable {
     }
 
     public double getTotal() {
-        return totalPrice;
+        return getTotalPrice();
     }
 
     public void computeTotalPrice() {
