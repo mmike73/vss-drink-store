@@ -19,6 +19,16 @@ public class ProductService {
     }
 
     public void updateProduct(int id, String name, double price, CategorieBautura categorie, TipBautura tip) {
+
+        // FIX
+        if (name == null || name.length() < 3 || name.length() > 20) {
+            throw new IllegalArgumentException("Invalid name");
+        }
+        if (price <= 0.0 || price > 1000.0) {
+            throw new IllegalArgumentException("Invalid price");
+        }
+        // FIX
+
         Product updated = new Product(id, name, price, categorie, tip);
         productRepo.update(updated);
     }
