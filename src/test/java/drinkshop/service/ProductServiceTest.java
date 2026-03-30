@@ -16,6 +16,16 @@ class ProductServiceTest {
     private final CategorieBautura VALID_CAT = CategorieBautura.JUICE;
     private final TipBautura VALID_TIP = TipBautura.PLANT_BASED;
 
+    @BeforeAll
+    static void start() {
+        System.out.println("Starting tests");
+    }
+
+    @AfterAll
+    static void end() {
+        System.out.println("Ending tests");
+    }
+
     @BeforeEach
     void setUp() {
 
@@ -46,6 +56,19 @@ class ProductServiceTest {
     }
 
     @Test
+    @DisplayName("ECP 2 (Invalid): Invalid Name (Too short), Valid Price")
+    @Tag("ECP")
+    void updateProduct_InvalidName_ShouldThrowException() {
+
+        String invalidName = "A";
+        double validPrice = 5.5;
+
+        assertThrows(IllegalArgumentException.class, () ->
+                productService.updateProduct(VALID_ID, invalidName, validPrice, VALID_CAT, VALID_TIP)
+        );
+    }
+
+    @Test
     @DisplayName("ECP 3 (Invalid): Valid Name, Invalid Price (Negative)")
     @Tag("ECP")
     void updateProduct_InvalidPrice_ShouldThrowException() {
@@ -57,38 +80,6 @@ class ProductServiceTest {
                 productService.updateProduct(VALID_ID, validName, invalidPrice, VALID_CAT, VALID_TIP)
         );
     }
-
-    @Test
-    @DisplayName("BVA 3 (Valid): Price exactly at upper included boundary (1000.0)")
-    @Tag("BVA")
-    void updateProduct_PriceUpperBoundaryValid_ShouldUpdateState() {
-
-        String validName = "Premium Wine";
-        double boundaryPrice = 1000.0;
-        fakeRepo.save(new Product(VALID_ID, "OldName", 1.0, VALID_CAT, VALID_TIP));
-
-        productService.updateProduct(VALID_ID, validName, boundaryPrice, VALID_CAT, VALID_TIP);
-
-        assertEquals(boundaryPrice, fakeRepo.database.get(VALID_ID).getPret());
-    }
-
-    @Test
-    @DisplayName("BVA 1 (Invalid): Price exactly at lower excluded boundary (0.0)")
-    @Tag("BVA")
-    @Timeout(1)
-    void updateProduct_PriceLowerBoundaryInvalid_ShouldThrowException() {
-
-        String validName = "Cola";
-        double boundaryPrice = 0.0;
-
-        assertThrows(IllegalArgumentException.class, () ->
-                productService.updateProduct(VALID_ID, validName, boundaryPrice, VALID_CAT, VALID_TIP)
-        );
-    }
-
-
-
-
 
     @Test
     @DisplayName("ECP 4 (Valid): Alternative Valid Name and Valid Price")
@@ -120,17 +111,19 @@ class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("ECP 2 (Invalid): Invalid Name (Too short), Valid Price")
-    @Tag("ECP")
-    void updateProduct_InvalidName_ShouldThrowException() {
+    @DisplayName("BVA 1 (Invalid): Price exactly at lower excluded boundary (0.0)")
+    @Tag("BVA")
+    @Timeout(1)
+    void updateProduct_PriceLowerBoundaryInvalid_ShouldThrowException() {
 
-        String invalidName = "A";
-        double validPrice = 5.5;
+        String validName = "Cola";
+        double boundaryPrice = 0.0;
 
         assertThrows(IllegalArgumentException.class, () ->
-                productService.updateProduct(VALID_ID, invalidName, validPrice, VALID_CAT, VALID_TIP)
+                productService.updateProduct(VALID_ID, validName, boundaryPrice, VALID_CAT, VALID_TIP)
         );
     }
+
 
     @Test
     @DisplayName("BVA 2 (Valid): Price just above lower boundary (0.01)")
@@ -145,6 +138,23 @@ class ProductServiceTest {
 
         assertEquals(boundaryPrice, fakeRepo.database.get(VALID_ID).getPret());
     }
+
+    @Test
+    @DisplayName("BVA 3 (Valid): Price exactly at upper included boundary (1000.0)")
+    @Tag("BVA")
+    void updateProduct_PriceUpperBoundaryValid_ShouldUpdateState() {
+
+        String validName = "Premium Wine";
+        double boundaryPrice = 1000.0;
+        fakeRepo.save(new Product(VALID_ID, "OldName", 1.0, VALID_CAT, VALID_TIP));
+
+        productService.updateProduct(VALID_ID, validName, boundaryPrice, VALID_CAT, VALID_TIP);
+
+        assertEquals(boundaryPrice, fakeRepo.database.get(VALID_ID).getPret());
+    }
+
+
+
 
     @Test
     @DisplayName("BVA 4 (Invalid): Price just above upper boundary (1000.01)")
