@@ -18,6 +18,10 @@ public class OrderValidator implements Validator<Order> {
         if (order.getItems() == null || order.getItems().isEmpty())
             errors += "Comanda fara produse!\n";
 
+    // fix: codul intra in for chiar daca lista e null
+        if (!errors.isEmpty())
+            throw new ValidationException(errors);
+
         for (OrderItem item : order.getItems()) {
             try {
                 itemValidator.validate(item);
